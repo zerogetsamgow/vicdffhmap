@@ -24,7 +24,7 @@ The Department of Families, Fairness and Housing has four divisions and 17 areas
 
 Areas are groups of local government areas. 
 
-Divisions are groups of areas.
+Divisions are groups of areas. 
 
 We have used this simple aggregation approach to create sf objects by summarising objects obtains using `strayr::read_absmap("lga2021")`
 

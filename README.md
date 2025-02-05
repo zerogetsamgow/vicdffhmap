@@ -169,13 +169,13 @@ knitr::kable(
 | East division  | Goulburn                | Moira                |
 | East division  | Goulburn                | Murrindindi          |
 | East division  | Goulburn                | Strathbogie          |
-| East division  | Outer Easten Melbourne  | Knox                 |
-| East division  | Outer Easten Melbourne  | Maroondah            |
-| East division  | Outer Easten Melbourne  | Yarra Ranges         |
-| East division  | Inner Easter Melbourne  | Boroondara           |
-| East division  | Inner Easter Melbourne  | Manningham           |
-| East division  | Inner Easter Melbourne  | Monash               |
-| East division  | Inner Easter Melbourne  | Whitehorse           |
+| East division  | Outer Eastern Melbourne | Knox                 |
+| East division  | Outer Eastern Melbourne | Maroondah            |
+| East division  | Outer Eastern Melbourne | Yarra Ranges         |
+| East division  | Inner Eastern Melbourne | Boroondara           |
+| East division  | Inner Eastern Melbourne | Manningham           |
+| East division  | Inner Eastern Melbourne | Monash               |
+| East division  | Inner Eastern Melbourne | Whitehorse           |
 | South division | Outer Gippsland         | East Gippsland       |
 | South division | Outer Gippsland         | Wellington           |
 | South division | Outer Gippsland         | Bass Coast           |
