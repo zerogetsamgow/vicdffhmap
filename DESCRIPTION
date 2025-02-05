@@ -1,18 +1,16 @@
 Package: vicdffhmap
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Authors@R: c(
-    person(
-      "Jane", "Doe",
-      email = "jane@example.com",
-      role = c("aut", "cre")
-    )
-  )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Title: Victorian Department of Families, Fairness and Housing divisions and areas sf objects
+Authors@R: 
+    person("Sam", "Gow", , "sam.gow@gmail.com", role = c("aut", "cre"))
+Version: 0.3.0
+Description: This package contains sf objects for the Victorian Department of Families, Fairness and Housing's
+    four divisions and 17 areas.
+License: CC BY 4.0
 Encoding: UTF-8
 LazyData: true
+Depends: 
+    R (>= 3.5)
 URL: https://github.com/zerogetsamgow/vicdffhmap
 BugReports: https://github.com/zerogetsamgow/vicdffhmap/issues
+RoxygenNote: 7.3.2

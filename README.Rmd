@@ -1,0 +1,144 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# vicdffhmap
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+***vicdffhmap*** is a simple package containing sf objects for the Victorian Department of Families, Fairness and Housing's divisions and areas.
+
+The Department of Families, Fairness and Housing has four divisions and 17 areas. 
+
+Areas are groups of local government areas. 
+
+Divisions are groups of areas.
+
+We have used this simple aggregation approach to create sf objects by summarising objects obtains using `strayr::read_absmap("lga2021")`
+
+## Installation
+
+You can install the development version of vicdffhmap from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("zerogetsamgow/vicdffhmap")
+```
+
+## division_map
+
+The following plot shows a map of the four divisionss which are contained in `vicdffhmap::division_map`.
+
+```{r division_map}
+library(vicdffhmap)
+
+## basic division_map
+ggplot2::ggplot(
+  division_map,
+  ggplot2::aes(
+    geometry = geometry,
+    fill = division_name,
+    label = division_name,
+    x = cent_long,
+    y = cent_lat
+    )
+  ) +
+  ggplot2::geom_sf(
+   colour = vpstheme::bv.smoke
+   )+
+  ggplot2::geom_label(
+    colour = vpstheme::bv.charcoal, 
+    fill = "grey", size = ggplot2::unit(7,"pt"))+
+  vpstheme::scale_fill_dffh(palette = "core", reverse = TRUE, guide = "none")+
+  ggthemes::theme_map()+
+  ggplot2::theme(
+    legend.position.inside = c(.7,.7)
+  )
+
+```
+
+
+
+## area_map
+
+The following plot shows a map of the 17 areas which are contained in `vicdffhmap::area_map`
+
+```{r include = FALSE}
+north_colours = vpstheme::dffh_colours$tints_purple
+names(north_colours) = 
+  area_tbl |> 
+    dplyr::filter(division_name == "North division") |>
+    dplyr::pull(area_name) |> unique()
+
+west_colours = c(vpstheme::dffh_colours$tints_teal,vpstheme::dffh_colours$tints_teal[4])
+names(west_colours) = 
+  area_tbl |> 
+    dplyr::filter(division_name == "West division") |>
+    dplyr::pull(area_name) |> unique()
+
+east_colours = c(vpstheme::dffh_colours$tints_green)
+names(east_colours) = 
+  area_tbl |> 
+    dplyr::filter(division_name == "East division") |>
+    dplyr::pull(area_name) |> unique()
+
+south_colours = c(vpstheme::dffh_colours$tints_blue[1:3])
+names(south_colours) = 
+  area_tbl |> 
+    dplyr::filter(division_name == "South division") |>
+    dplyr::pull(area_name) |> unique()
+
+```
+
+```{r area_map}
+## basic area_map
+ggplot2::ggplot(
+  area_map,
+  ggplot2::aes(
+    geometry = geometry,
+    fill = area_name,
+    label = area_name,
+    x = cent_long,
+    y = cent_lat
+    )
+  ) +
+  ggplot2::geom_sf(
+   colour = vpstheme::bv.smoke
+   )+
+  ggrepel::geom_label_repel(
+    colour = vpstheme::bv.charcoal, 
+    fill = vpstheme::bv.smoke, size = ggplot2::unit(3,"pt"),
+    max.overlaps = 20,
+    segment.colour = vpstheme::bv.smoke)+
+  ggplot2::scale_fill_manual(
+    values = c(north_colours, west_colours, east_colours, south_colours), guide = "none")+
+  ggthemes::theme_map()+
+  ggplot2::theme(
+    legend.position.inside = c(.7,.7)
+  )
+
+```
+
+## area_tbl
+
+The package contains a third dataset `vicedumap::area_tbl` which shows the mapping of local government areas, to areas, to divisions
+
+```{r division_tbl}
+## print full table of regions, areas and lgas
+knitr::kable(
+  area_tbl
+)
+
+```
