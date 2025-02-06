@@ -3,9 +3,9 @@ Type: Package
 Title: Victorian Department of Families, Fairness and Housing divisions and areas sf objects
 Authors@R: 
     person("Sam", "Gow", , "sam.gow@gmail.com", role = c("aut", "cre"))
-Version: 1.0.0
+Version: 1.1.0
 Description: This package contains sf objects for the Victorian Department of Families, Fairness and Housing's
-    four divisions and 17 areas.
+    four divisions and 17 areas and helper functions.
 License: CC BY 4.0
 Encoding: UTF-8
 LazyData: true
@@ -15,4 +15,11 @@ URL: https://github.com/zerogetsamgow/vicdffhmap
 BugReports: https://github.com/zerogetsamgow/vicdffhmap/issues
 RoxygenNote: 7.3.2
 Suggests: 
-    sf
+    sf,
+    testthat (>= 3.0.0),
+    vpstheme
+Config/testthat/edition: 3
+Imports: 
+    dplyr,
+    stringdist,
+    stringr

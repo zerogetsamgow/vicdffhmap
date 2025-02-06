@@ -26,7 +26,7 @@ Areas are groups of local government areas.
 
 Divisions are groups of areas. 
 
-We have used this simple aggregation approach to create sf objects by summarising objects obtains using `strayr::read_absmap("lga2021")`
+We have used this simple aggregation approach to create sf objects by summarising objects obtained using `strayr::read_absmap("lga2021")`
 
 ## Installation
 
@@ -94,7 +94,7 @@ names(east_colours) =
     dplyr::filter(division_name == "East division") |>
     dplyr::pull(area_name) |> unique()
 
-south_colours = c(vpstheme::dffh_colours$tints_blue[1:3])
+south_colours = c(vpstheme::dffh_colours$tints_blue)
 names(south_colours) = 
   area_tbl |> 
     dplyr::filter(division_name == "South division") |>
@@ -131,9 +131,22 @@ ggplot2::ggplot(
 
 ```
 
+## clean_dffh_area()
+
+To assist with joining datasets to the shapefiles, ***vicdffhmap*** exports the `clean_dffh_name()` function. This function will return strings formatted as per the area_name variable in `area_map`. For example:
+
+```{r include = TRUE}
+
+clean_dffh_area("Hume moreland")
+
+clean_dffh_area("NE Melb")
+
+```
+The function can also be used to create abbreviated names for each area with 15 or less characters.
+
 ## area_tbl
 
-The package contains a third dataset `vicedumap::area_tbl` which shows the mapping of local government areas, to areas, to divisions
+The package contains a third dataset `vicdffhmap::area_tbl` which shows the mapping of local government areas, to areas, to divisions
 
 ```{r division_tbl}
 ## print full table of regions, areas and lgas

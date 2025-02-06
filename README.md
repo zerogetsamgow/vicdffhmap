@@ -18,7 +18,7 @@ Areas are groups of local government areas.
 Divisions are groups of areas.
 
 We have used this simple aggregation approach to create sf objects by
-summarising objects obtains using `strayr::read_absmap("lga2021")`
+summarising objects obtained using `strayr::read_absmap("lga2021")`
 
 ## Installation
 
@@ -99,9 +99,28 @@ ggplot2::ggplot(
 
 <img src="man/figures/README-area_map-1.png" width="100%" />
 
+## clean_dffh_area()
+
+To assist with joining datasets to the shapefiles, ***vicdffhmap***
+exports the `clean_dffh_name()` function. This function will return
+strings formatted as per the area_name variable in `area_map`. For
+example:
+
+``` r
+
+clean_dffh_area("Hume moreland")
+#> [1] "Hume Merri-bek"
+
+clean_dffh_area("NE Melb")
+#> [1] "North Eastern Melbourne"
+```
+
+The function can also be used to create abbreviated names for each area
+with 15 or less characters.
+
 ## area_tbl
 
-The package contains a third dataset `vicedumap::area_tbl` which shows
+The package contains a third dataset `vicdffhmap::area_tbl` which shows
 the mapping of local government areas, to areas, to divisions
 
 ``` r
@@ -111,84 +130,84 @@ knitr::kable(
 )
 ```
 
-| division_name  | area_name               | lga_name             |
-|:---------------|:------------------------|:---------------------|
-| West division  | Wimmera South West      | Corangamite          |
-| West division  | Wimmera South West      | Glenelg              |
-| West division  | Wimmera South West      | Hindmarsh            |
-| West division  | Wimmera South West      | Horsham              |
-| West division  | Wimmera South West      | Moyne                |
-| West division  | Wimmera South West      | Northern Grampians   |
-| West division  | Wimmera South West      | Southern Grampians   |
-| West division  | Wimmera South West      | Warrnambool          |
-| West division  | Wimmera South West      | West Wimmera         |
-| West division  | Wimmera South West      | Yarriambiack         |
-| West division  | Barwon                  | Colac Otway          |
-| West division  | Barwon                  | Greater Geelong      |
-| West division  | Barwon                  | Surf Coast           |
-| West division  | Barwon                  | Queenscliffe         |
-| West division  | Central Highlands       | Ararat               |
-| West division  | Central Highlands       | Ballarat             |
-| West division  | Central Highlands       | Golden Plains        |
-| West division  | Central Highlands       | Hepburn              |
-| West division  | Central Highlands       | Moorabool            |
-| West division  | Central Highlands       | Pyrenees             |
-| West division  | Western Melbourne       | Hobsons Bay          |
-| West division  | Western Melbourne       | Maribyrnong          |
-| West division  | Western Melbourne       | Melbourne            |
-| West division  | Western Melbourne       | Moonee Valley        |
-| West division  | Western Melbourne       | Wyndham              |
-| West division  | Brimbank Melton         | Brimbank             |
-| West division  | Brimbank Melton         | Melton               |
-| North division | Mallee                  | Mildura              |
-| North division | Mallee                  | Swan Hill            |
-| North division | Mallee                  | Buloke               |
-| North division | Mallee                  | Gannawarra           |
-| North division | Loddon                  | Campaspe             |
-| North division | Loddon                  | Central Goldfields   |
-| North division | Loddon                  | Greater Bendigo      |
-| North division | Loddon                  | Loddon               |
-| North division | Loddon                  | Macedon Ranges       |
-| North division | Loddon                  | Mount Alexander      |
-| North division | Hume Meri-bek           | Hume                 |
-| North division | Hume Meri-bek           | Merri-bek            |
-| North division | North Eastern Melbourne | Banyule              |
-| North division | North Eastern Melbourne | Darebin              |
-| North division | North Eastern Melbourne | Nillumbik            |
-| North division | North Eastern Melbourne | Whittlesea           |
-| North division | North Eastern Melbourne | Yarra                |
-| East division  | Ovens Murray            | Alpine               |
-| East division  | Ovens Murray            | Benalla              |
-| East division  | Ovens Murray            | Indigo               |
-| East division  | Ovens Murray            | Mansfield            |
-| East division  | Ovens Murray            | Towong               |
-| East division  | Ovens Murray            | Wangaratta           |
-| East division  | Ovens Murray            | Wodonga              |
-| East division  | Goulburn                | Greater Shepparton   |
-| East division  | Goulburn                | Mitchell             |
-| East division  | Goulburn                | Moira                |
-| East division  | Goulburn                | Murrindindi          |
-| East division  | Goulburn                | Strathbogie          |
-| East division  | Outer Eastern Melbourne | Knox                 |
-| East division  | Outer Eastern Melbourne | Maroondah            |
-| East division  | Outer Eastern Melbourne | Yarra Ranges         |
-| East division  | Inner Eastern Melbourne | Boroondara           |
-| East division  | Inner Eastern Melbourne | Manningham           |
-| East division  | Inner Eastern Melbourne | Monash               |
-| East division  | Inner Eastern Melbourne | Whitehorse           |
-| South division | Outer Gippsland         | East Gippsland       |
-| South division | Outer Gippsland         | Wellington           |
-| South division | Outer Gippsland         | Bass Coast           |
-| South division | Outer Gippsland         | Baw Baw              |
-| South division | Outer Gippsland         | Latrobe              |
-| South division | Outer Gippsland         | South Gippsland      |
-| South division | Southern Melbourne      | Cardinia             |
-| South division | Southern Melbourne      | Casey                |
-| South division | Southern Melbourne      | Greater Dandenong    |
-| South division | Bayside Peninsula       | Bayside              |
-| South division | Bayside Peninsula       | Frankston            |
-| South division | Bayside Peninsula       | Glen Eira            |
-| South division | Bayside Peninsula       | Kingston             |
-| South division | Bayside Peninsula       | Mornington Peninsula |
-| South division | Bayside Peninsula       | Port Phillip         |
-| South division | Bayside Peninsula       | Stonnington          |
+| division_name  | area_name               | lga_name             | regional_lga |
+|:---------------|:------------------------|:---------------------|:-------------|
+| West division  | Wimmera South West      | Corangamite          | TRUE         |
+| West division  | Wimmera South West      | Glenelg              | TRUE         |
+| West division  | Wimmera South West      | Hindmarsh            | TRUE         |
+| West division  | Wimmera South West      | Horsham              | TRUE         |
+| West division  | Wimmera South West      | Moyne                | TRUE         |
+| West division  | Wimmera South West      | Northern Grampians   | TRUE         |
+| West division  | Wimmera South West      | Southern Grampians   | TRUE         |
+| West division  | Wimmera South West      | Warrnambool          | TRUE         |
+| West division  | Wimmera South West      | West Wimmera         | TRUE         |
+| West division  | Wimmera South West      | Yarriambiack         | TRUE         |
+| West division  | Barwon                  | Colac Otway          | TRUE         |
+| West division  | Barwon                  | Greater Geelong      | TRUE         |
+| West division  | Barwon                  | Surf Coast           | TRUE         |
+| West division  | Barwon                  | Queenscliffe         | TRUE         |
+| West division  | Central Highlands       | Ararat               | TRUE         |
+| West division  | Central Highlands       | Ballarat             | TRUE         |
+| West division  | Central Highlands       | Golden Plains        | TRUE         |
+| West division  | Central Highlands       | Hepburn              | TRUE         |
+| West division  | Central Highlands       | Moorabool            | TRUE         |
+| West division  | Central Highlands       | Pyrenees             | TRUE         |
+| West division  | Western Melbourne       | Hobsons Bay          | FALSE        |
+| West division  | Western Melbourne       | Maribyrnong          | FALSE        |
+| West division  | Western Melbourne       | Melbourne            | FALSE        |
+| West division  | Western Melbourne       | Moonee Valley        | FALSE        |
+| West division  | Western Melbourne       | Wyndham              | FALSE        |
+| West division  | Brimbank Melton         | Brimbank             | FALSE        |
+| West division  | Brimbank Melton         | Melton               | FALSE        |
+| North division | Mallee                  | Mildura              | TRUE         |
+| North division | Mallee                  | Swan Hill            | TRUE         |
+| North division | Mallee                  | Buloke               | TRUE         |
+| North division | Mallee                  | Gannawarra           | TRUE         |
+| North division | Loddon                  | Campaspe             | TRUE         |
+| North division | Loddon                  | Central Goldfields   | TRUE         |
+| North division | Loddon                  | Greater Bendigo      | TRUE         |
+| North division | Loddon                  | Loddon               | TRUE         |
+| North division | Loddon                  | Macedon Ranges       | TRUE         |
+| North division | Loddon                  | Mount Alexander      | TRUE         |
+| North division | Hume Merri-bek          | Hume                 | FALSE        |
+| North division | Hume Merri-bek          | Merri-bek            | FALSE        |
+| North division | North Eastern Melbourne | Banyule              | FALSE        |
+| North division | North Eastern Melbourne | Darebin              | FALSE        |
+| North division | North Eastern Melbourne | Nillumbik            | FALSE        |
+| North division | North Eastern Melbourne | Whittlesea           | FALSE        |
+| North division | North Eastern Melbourne | Yarra                | FALSE        |
+| East division  | Ovens Murray            | Alpine               | TRUE         |
+| East division  | Ovens Murray            | Benalla              | TRUE         |
+| East division  | Ovens Murray            | Indigo               | TRUE         |
+| East division  | Ovens Murray            | Mansfield            | TRUE         |
+| East division  | Ovens Murray            | Towong               | TRUE         |
+| East division  | Ovens Murray            | Wangaratta           | TRUE         |
+| East division  | Ovens Murray            | Wodonga              | TRUE         |
+| East division  | Goulburn                | Greater Shepparton   | TRUE         |
+| East division  | Goulburn                | Mitchell             | TRUE         |
+| East division  | Goulburn                | Moira                | TRUE         |
+| East division  | Goulburn                | Murrindindi          | TRUE         |
+| East division  | Goulburn                | Strathbogie          | TRUE         |
+| East division  | Outer Eastern Melbourne | Knox                 | FALSE        |
+| East division  | Outer Eastern Melbourne | Maroondah            | FALSE        |
+| East division  | Outer Eastern Melbourne | Yarra Ranges         | FALSE        |
+| East division  | Inner Eastern Melbourne | Boroondara           | FALSE        |
+| East division  | Inner Eastern Melbourne | Manningham           | FALSE        |
+| East division  | Inner Eastern Melbourne | Monash               | FALSE        |
+| East division  | Inner Eastern Melbourne | Whitehorse           | FALSE        |
+| South division | Outer Gippsland         | East Gippsland       | TRUE         |
+| South division | Outer Gippsland         | Wellington           | TRUE         |
+| South division | Inner Gippsland         | Bass Coast           | TRUE         |
+| South division | Inner Gippsland         | Baw Baw              | TRUE         |
+| South division | Inner Gippsland         | Latrobe              | TRUE         |
+| South division | Inner Gippsland         | South Gippsland      | TRUE         |
+| South division | Southern Melbourne      | Cardinia             | FALSE        |
+| South division | Southern Melbourne      | Casey                | FALSE        |
+| South division | Southern Melbourne      | Greater Dandenong    | FALSE        |
+| South division | Bayside Peninsula       | Bayside              | FALSE        |
+| South division | Bayside Peninsula       | Frankston            | FALSE        |
+| South division | Bayside Peninsula       | Glen Eira            | FALSE        |
+| South division | Bayside Peninsula       | Kingston             | FALSE        |
+| South division | Bayside Peninsula       | Mornington Peninsula | FALSE        |
+| South division | Bayside Peninsula       | Port Phillip         | FALSE        |
+| South division | Bayside Peninsula       | Stonnington          | FALSE        |

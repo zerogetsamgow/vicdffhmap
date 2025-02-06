@@ -1,13 +1,15 @@
 ## code to prepare `dffh_regions` dataset goes here
 
 ## code to prepare datasets
-
-# Read table of regions, areas, and lgas from departmental website
+library(sf)
+# Read table of regions, areas, and lgas from locally stored file
 area_tbl =
   list.files("./inst/extdata", full.names = "TRUE") |>
   officer::read_docx() |>
   officer::docx_summary() |>
+  # Need to have sf attached for next step to work.
   tibble::as_tibble() |>
+  # clean data and extract names for divisions, areas and lgas
   dplyr::mutate(style_name = stringr::str_trim(style_name)) |>
   dplyr::filter(
     content_type == "paragraph",
@@ -15,17 +17,17 @@ area_tbl =
       stringr::str_to_lower(style_name),
       "^heading|bullet")) |>
   dplyr::mutate(division_name = stringr::str_extract(text,".*division"),
-                area_name = stringr::str_extract(text, ".*local government areas") |> stringr::str_remove("\\s\\–.*"),
+                area_name = stringr::str_extract(text, ".*local government areas") |> stringr::str_remove("\\s\\–\\sl.*"),
                 lga_name = vpstheme::clean_vic_lga(text)) |>
   tidyr::fill(division_name) |>
   tidyr::fill(area_name) |>
   dplyr::select(contains("name")) |>
+  dplyr::mutate(regional_lga = !stringr::str_detect(area_name,"Melbourne|Melton|Hume|Bayside")) |>
   dplyr::filter(
     stringr::str_detect(
         stringr::str_to_lower(style_name),
       "bullet")) |>
   dplyr::select(-style_name)
-
 
 usethis::use_data(area_tbl, overwrite = TRUE)
 
