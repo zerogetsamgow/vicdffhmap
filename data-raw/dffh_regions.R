@@ -2,6 +2,7 @@
 
 ## code to prepare datasets
 library(sf)
+
 # Read table of regions, areas, and lgas from locally stored file
 area_tbl =
   list.files("./inst/extdata", full.names = "TRUE") |>

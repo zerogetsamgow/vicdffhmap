@@ -59,7 +59,7 @@ clean_dffh_area <- function(x, to = "dffh_name", fuzzy_match = TRUE, max_dist = 
     matched_name <- names(dffh_dict[match(x, tolower(dffh_dict))])
   }
 
-  ret <- dffh_dict_tbl[[to]][match(matched_name, dffh_dict_tbl$dffh_name)]
+  ret <- dffh_tbl[[to]][match(matched_name, dffh_tbl$dffh_name)]
 
   ret <- as.character(ret)
 
